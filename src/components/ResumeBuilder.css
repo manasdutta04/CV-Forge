@@ -1,0 +1,47 @@
+.resume-builder {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.resume-builder__content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.step-placeholder {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 4rem 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #64748b;
+  font-size: 1.125rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .resume-builder {
+    gap: 1rem;
+  }
+  
+  .step-placeholder {
+    padding: 2rem 1rem;
+    margin: 0 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-placeholder {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem;
+    font-size: 0.875rem;
+  }
+}
