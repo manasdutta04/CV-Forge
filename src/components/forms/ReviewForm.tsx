@@ -463,7 +463,9 @@ export function ReviewForm() {
             <h3>Resume Completion</h3>
             <div className="completion-percentage">
               <span className="percentage-number">{completionPercentage}%</span>
-              <span className="percentage-label">Complete</span>
+              <span className="percentage-label">
+                {completionPercentage === 100 ? 'Complete ✨' : 'Complete'}
+              </span>
             </div>
           </div>
           
@@ -475,27 +477,37 @@ export function ReviewForm() {
           </div>
 
           <div className="completion-stats">
-            <div className="stat-item">
+            <div className="stat-item" title={`${stats.education} education ${stats.education === 1 ? 'entry' : 'entries'} added`}>
               <span className="stat-number">{stats.education}</span>
               <span className="stat-label">Education</span>
             </div>
-            <div className="stat-item">
+            <div className="stat-item" title={`${stats.experience} work experience ${stats.experience === 1 ? 'entry' : 'entries'} added`}>
               <span className="stat-number">{stats.experience}</span>
               <span className="stat-label">Experience</span>
             </div>
-            <div className="stat-item">
+            <div className="stat-item" title={`${stats.projects} ${stats.projects === 1 ? 'project' : 'projects'} added`}>
               <span className="stat-number">{stats.projects}</span>
               <span className="stat-label">Projects</span>
             </div>
-            <div className="stat-item">
+            <div className="stat-item" title={`${stats.skills} technical skills added`}>
               <span className="stat-number">{stats.skills}</span>
               <span className="stat-label">Skills</span>
             </div>
-            <div className="stat-item">
+            <div className="stat-item" title={`${stats.achievements} achievement ${stats.achievements === 1 ? 'entry' : 'entries'} added`}>
               <span className="stat-number">{stats.achievements}</span>
               <span className="stat-label">Awards</span>
             </div>
           </div>
+
+          {completionPercentage === 100 && (
+            <div className="completion-celebration">
+              <div className="celebration-icon">🎉</div>
+              <div className="celebration-text">
+                <h4>Congratulations!</h4>
+                <p>Your resume is complete and ready to download</p>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="sections-review">
