@@ -4,6 +4,7 @@ import { useResume } from '../../context/ResumeContext';
 import { Button } from '../ui/Button';
 import { ResumePreview } from '../resume/ResumePreview';
 import { PDFGenerator } from '../../utils/pdfGenerator';
+import ATSScore from '../ats/ATSScore';
 import './ReviewForm.css';
 
 export function ReviewForm() {
@@ -541,6 +542,9 @@ export function ReviewForm() {
           </div>
         </div>
 
+        {/* ATS Compatibility Check */}
+        <ATSScore resumeData={resumeData} />
+
         <div className="resume-actions">
           <h3>Actions</h3>
           <div className="actions-grid">
@@ -589,28 +593,6 @@ export function ReviewForm() {
               <h4>Create Another</h4>
               <p>Start a new resume from scratch</p>
             </button>
-          </div>
-        </div>
-
-        <div className="tips-section">
-          <h3>Tips for Success</h3>
-          <div className="tips-grid">
-            <div className="tip-item">
-              <h4>🎯 Tailor for Each Job</h4>
-              <p>Customize your resume for specific job applications by highlighting relevant skills and experiences.</p>
-            </div>
-            <div className="tip-item">
-              <h4>📝 Keep it Concise</h4>
-              <p>Aim for 1-2 pages maximum. Focus on your most relevant and impressive achievements.</p>
-            </div>
-            <div className="tip-item">
-              <h4>🔍 ATS-Friendly</h4>
-              <p>Use standard section headings and avoid complex formatting to ensure ATS compatibility.</p>
-            </div>
-            <div className="tip-item">
-              <h4>📊 Quantify Achievements</h4>
-              <p>Use numbers and metrics wherever possible to demonstrate your impact and achievements.</p>
-            </div>
           </div>
         </div>
       </div>
