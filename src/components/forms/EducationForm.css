@@ -1,11 +1,12 @@
 .education-form {
   max-width: 900px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(20px);
   border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .education-list {
@@ -17,15 +18,17 @@
 
 .education-item {
   padding: 1.5rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.7);
-  transition: all 0.2s ease-in-out;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.8) 100%);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease-in-out;
 }
 
 .education-item:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: rgba(99, 102, 241, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.1), 0 4px 6px -2px rgba(99, 102, 241, 0.05);
+  transform: translateY(-2px);
 }
 
 .education-header {

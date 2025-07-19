@@ -4,13 +4,16 @@
 
 .step-navigation__container {
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 0.75rem;
   overflow-x: auto;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .step {
@@ -18,10 +21,12 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-width: 150px;
-  padding: 1rem;
+  flex: 1;
+  min-width: 140px;
+  max-width: 180px;
+  padding: 1.25rem 0.75rem;
   border-radius: 0.75rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease;
   position: relative;
   cursor: pointer;
 }
@@ -31,17 +36,31 @@
 }
 
 .step--accessible:hover {
-  background-color: rgba(37, 99, 235, 0.05);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.9) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.step--accessible:hover .step__title {
+  color: #1f2937;
+}
+
+.step--accessible:hover .step__description {
+  color: #4b5563;
 }
 
 .step--active {
-  background-color: rgba(37, 99, 235, 0.1);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  color: inherit;
+  box-shadow: 0 15px 25px -5px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
 }
 
 .step--completed {
-  background-color: rgba(16, 185, 129, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  color: inherit;
+  box-shadow: 0 15px 25px -5px rgba(16, 185, 129, 0.2);
 }
 
 .step:not(.step--accessible) {
@@ -54,22 +73,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  background-color: #e5e7eb;
-  margin-bottom: 0.75rem;
-  transition: all 0.2s ease-in-out;
+  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .step--active .step__indicator {
-  background-color: #2563eb;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
+  box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3);
 }
 
 .step--completed .step__indicator {
-  background-color: #10b981;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
+  box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
 }
 
 .step__icon {
@@ -98,25 +120,37 @@
 }
 
 .step__title {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: #1f2937;
-  margin: 0 0 0.25rem 0;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
 }
 
 .step--active .step__title {
-  color: #2563eb;
+  color: #374151;
+  font-weight: 700;
 }
 
 .step--completed .step__title {
-  color: #10b981;
+  color: #374151;
+  font-weight: 700;
 }
 
 .step__description {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #6b7280;
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.step--active .step__description {
+  color: #6b7280;
+}
+
+.step--completed .step__description {
+  color: #6b7280;
 }
 
 .step__connector {
@@ -135,29 +169,57 @@
 }
 
 /* Responsive design */
+@media (max-width: 1024px) {
+  .step-navigation__container {
+    padding: 1.25rem;
+  }
+  
+  .step {
+    min-width: 120px;
+    max-width: 160px;
+    padding: 1rem 0.5rem;
+  }
+  
+  .step__indicator {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .step__title {
+    font-size: 0.85rem;
+  }
+  
+  .step__description {
+    font-size: 0.75rem;
+  }
+}
+
 @media (max-width: 768px) {
   .step-navigation__container {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    padding: 1rem;
   }
   
   .step {
     flex-direction: row;
     text-align: left;
     min-width: auto;
-    padding: 0.75rem;
+    max-width: none;
+    padding: 1rem;
+    align-items: center;
   }
   
   .step__indicator {
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     margin-bottom: 0;
-    margin-right: 0.75rem;
+    margin-right: 1rem;
     flex-shrink: 0;
   }
   
   .step__number {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
   
   .step__connector {
@@ -166,21 +228,29 @@
 }
 
 @media (max-width: 480px) {
+  .step-navigation__container {
+    padding: 0.75rem;
+  }
+  
   .step {
-    padding: 0.5rem;
+    padding: 0.75rem;
   }
   
   .step__indicator {
-    width: 1.75rem;
-    height: 1.75rem;
-    margin-right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.75rem;
   }
   
   .step__title {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
   
   .step__description {
-    font-size: 0.625rem;
+    font-size: 0.7rem;
+  }
+  
+  .step__number {
+    font-size: 0.75rem;
   }
 }

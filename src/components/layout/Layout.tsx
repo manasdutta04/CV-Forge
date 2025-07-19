@@ -13,12 +13,20 @@ export function Layout({ children }: LayoutProps) {
     <div className="layout">
       <header className="header">
         <div className="header__content">
-          <div className="header__brand">
-            <h1 className="header__title">CV Forge</h1>
-            <p className="header__subtitle">Professional Resume Builder for Students</p>
-          </div>
-          
-          <div className="header__progress">
+        <div className="header__brand">
+          <h1 className="header__title">CV Forge</h1>
+          <p className="header__subtitle">
+            Engineered by{' '}
+            <a 
+              href="https://www.linkedin.com/in/manasdutta04/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="header__link"
+            >
+              Manas Dutta
+            </a>
+          </p>
+        </div>          <div className="header__progress">
             <div className="progress-bar">
               <div 
                 className="progress-bar__fill" 

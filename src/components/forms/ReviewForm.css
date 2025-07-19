@@ -1,11 +1,12 @@
 .review-form {
   max-width: 1000px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(20px);
   border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .review-content {
@@ -16,11 +17,12 @@
 }
 
 .completion-overview {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   color: white;
   padding: 2rem;
   border-radius: 1rem;
   text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.3);
 }
 
 .completion-header {
@@ -77,8 +79,8 @@
 .stat-item {
   text-align: center;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
   backdrop-filter: blur(10px);
 }
 
@@ -95,10 +97,11 @@
 }
 
 .sections-review {
-  background: white;
-  border: 2px solid #e2e8f0;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid rgba(226, 232, 240, 0.5);
   border-radius: 1rem;
   padding: 1.5rem;
+  backdrop-filter: blur(10px);
 }
 
 .sections-review h3 {
@@ -198,20 +201,21 @@
   align-items: center;
   text-align: center;
   padding: 1.5rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 0.75rem;
-  background: white;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0.8) 100%);
+  backdrop-filter: blur(10px);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   text-decoration: none;
   color: inherit;
 }
 
 .action-card:hover:not(:disabled) {
-  border-color: #2563eb;
-  background: rgba(37, 99, 235, 0.05);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.04);
 }
 
 .action-card:disabled {
@@ -221,7 +225,7 @@
 }
 
 .action-card svg {
-  color: #2563eb;
+  color: #6366f1;
   margin-bottom: 1rem;
 }
 
@@ -229,29 +233,29 @@
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
   font-weight: 600;
-  color: #374151;
+  color: #0f172a;
 }
 
 .action-card p {
   margin: 0;
   font-size: 0.875rem;
-  color: #6b7280;
+  color: #64748b;
 }
 
 /* Special styling for Create Another button */
 .action-card.create-another {
-  border-color: #f59e0b;
-  background: rgba(245, 158, 11, 0.05);
+  border-color: rgba(251, 191, 36, 0.3);
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.8) 0%, rgba(253, 230, 138, 0.8) 100%);
 }
 
 .action-card.create-another:hover:not(:disabled) {
-  border-color: #d97706;
-  background: rgba(217, 119, 6, 0.1);
-  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+  border-color: rgba(245, 158, 11, 0.5);
+  background: linear-gradient(135deg, rgba(254, 243, 199, 0.95) 0%, rgba(253, 230, 138, 0.95) 100%);
+  box-shadow: 0 20px 25px -5px rgba(245, 158, 11, 0.1), 0 10px 10px -5px rgba(245, 158, 11, 0.04);
 }
 
 .action-card.create-another svg {
-  color: #d97706;
+  color: #f59e0b;
 }
 
 .action-card.create-another h4 {
@@ -263,34 +267,55 @@
 }
 
 .tips-section {
-  background: rgba(16, 185, 129, 0.05);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: 1rem;
-  padding: 1.5rem;
+  background: linear-gradient(145deg, rgba(16, 185, 129, 0.08), rgba(34, 197, 94, 0.05));
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.1);
+  transition: all 0.3s ease;
+}
+
+.tips-section:hover {
+  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.15);
+  transform: translateY(-2px);
 }
 
 .tips-section h3 {
   margin: 0 0 1.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #047857;
+  background: linear-gradient(135deg, #047857, #059669);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .tips-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .tip-item {
-  background: white;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(16, 185, 129, 0.1);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  padding: 1.25rem;
+  border-radius: 0.875rem;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.05);
+}
+
+.tip-item:hover {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.12);
+  transform: translateY(-3px);
+  border-color: rgba(16, 185, 129, 0.25);
 }
 
 .tip-item h4 {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.75rem 0;
   font-size: 0.875rem;
   font-weight: 600;
   color: #047857;
