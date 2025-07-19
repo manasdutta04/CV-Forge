@@ -1,0 +1,58 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="96" cy="96" r="96" fill="#f8fafc"/>
+  <circle cx="96" cy="96" r="88" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+  
+  <!-- Document Background -->
+  <rect x="24" y="32" width="120" height="128" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="4"/>
+  
+  <!-- Document Corner Fold -->
+  <path d="M120 32 L144 56 L120 56 Z" fill="#e5e7eb" stroke="#2563eb" stroke-width="3"/>
+  
+  <!-- Header Section -->
+  <rect x="36" y="48" width="84" height="4" rx="2" fill="#1f2937"/>
+  <rect x="36" y="56" width="72" height="2" rx="1" fill="#6b7280"/>
+  <rect x="36" y="60" width="96" height="2" rx="1" fill="#6b7280"/>
+  
+  <!-- Education Section -->
+  <rect x="36" y="72" width="60" height="3" rx="1.5" fill="#1f2937"/>
+  <rect x="36" y="78" width="90" height="2" rx="1" fill="#6b7280"/>
+  <rect x="36" y="82" width="84" height="2" rx="1" fill="#6b7280"/>
+  <rect x="36" y="86" width="78" height="2" rx="1" fill="#6b7280"/>
+  
+  <!-- Experience Section -->
+  <rect x="36" y="98" width="66" height="3" rx="1.5" fill="#1f2937"/>
+  <rect x="36" y="104" width="96" height="2" rx="1" fill="#6b7280"/>
+  <rect x="36" y="108" width="88" height="2" rx="1" fill="#6b7280"/>
+  <rect x="36" y="112" width="92" height="2" rx="1" fill="#6b7280"/>
+  
+  <!-- Skills Section -->
+  <rect x="36" y="124" width="48" height="3" rx="1.5" fill="#1f2937"/>
+  <rect x="36" y="130" width="80" height="2" rx="1" fill="#6b7280"/>
+  <rect x="36" y="134" width="76" height="2" rx="1" fill="#6b7280"/>
+  
+  <!-- Forge/Craft Element - Enhanced Hammer -->
+  <g transform="translate(140, 100)">
+    <!-- Hammer Handle -->
+    <rect x="2" y="16" width="6" height="36" rx="3" fill="#8b5cf6" transform="rotate(45 5 34)"/>
+    <!-- Hammer Head -->
+    <rect x="-2" y="8" width="20" height="12" rx="4" fill="#6366f1" transform="rotate(45 8 14)"/>
+    <!-- Anvil Base -->
+    <rect x="16" y="28" width="24" height="8" rx="2" fill="#374151"/>
+    <!-- Sparks/Craft Effect -->
+    <circle cx="32" cy="12" r="3" fill="#fbbf24"/>
+    <circle cx="38" cy="18" r="2.5" fill="#f59e0b"/>
+    <circle cx="34" cy="24" r="2" fill="#fbbf24"/>
+    <circle cx="28" cy="16" r="1.5" fill="#fcd34d"/>
+    <circle cx="40" cy="14" r="1.8" fill="#f97316"/>
+  </g>
+  
+  <!-- CV Badge -->
+  <circle cx="156" cy="48" r="20" fill="#10b981" stroke="#ffffff" stroke-width="4"/>
+  <text x="156" y="58" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">CV</text>
+  
+  <!-- Decorative Elements -->
+  <circle cx="48" cy="144" r="2" fill="#e5e7eb"/>
+  <circle cx="56" cy="148" r="1.5" fill="#e5e7eb"/>
+  <circle cx="52" cy="152" r="1" fill="#e5e7eb"/>
+</svg>

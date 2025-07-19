@@ -1,0 +1,31 @@
+{
+  "name": "CV Forge - Resume Builder",
+  "short_name": "CV Forge",
+  "description": "Professional Resume Builder for Students - Create ATS-friendly resumes with guided forms",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-16x16.svg", 
+      "sizes": "16x16",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/android-chrome-192x192.svg",
+      "sizes": "192x192", 
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["productivity", "education", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}
