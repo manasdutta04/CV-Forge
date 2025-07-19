@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, Eye, Edit3, CheckCircle, FileText, Printer, Plus } from 'lucide-react';
+import { Download, Eye, Edit3, CheckCircle, FileText, Printer, Plus, FileDown } from 'lucide-react';
 import { useResume } from '../../context/ResumeContext';
 import { Button } from '../ui/Button';
 import { ResumePreview } from '../resume/ResumePreview';
@@ -611,7 +611,7 @@ export function ReviewForm() {
           size="lg"
           loading={isGenerating}
         >
-          <Download size={16} />
+          <FileDown size={20} />
           Download Resume
         </Button>
       </div>

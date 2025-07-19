@@ -556,6 +556,33 @@
   border-top: 1px solid #e2e8f0;
 }
 
+/* Enhanced Download Button Styling */
+.form-actions .button:last-child {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.form-actions .button:last-child:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.form-actions .button:last-child:disabled {
+  opacity: 0.7;
+  transform: none;
+}
+
+.form-actions .button:last-child svg {
+  transition: transform 0.3s ease;
+}
+
+.form-actions .button:last-child:hover:not(:disabled) svg {
+  transform: translateY(-1px);
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .review-form {
