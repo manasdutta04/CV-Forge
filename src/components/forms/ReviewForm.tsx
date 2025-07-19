@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, Eye, Edit3, CheckCircle, FileText, Printer } from 'lucide-react';
+import { Download, Eye, Edit3, CheckCircle, FileText, Printer, Plus } from 'lucide-react';
 import { useResume } from '../../context/ResumeContext';
 import { Button } from '../ui/Button';
 import { ResumePreview } from '../resume/ResumePreview';
@@ -7,7 +7,7 @@ import { PDFGenerator } from '../../utils/pdfGenerator';
 import './ReviewForm.css';
 
 export function ReviewForm() {
-  const { state, dispatch, saveProgress } = useResume();
+  const { state, dispatch, saveProgress, clearAllData } = useResume();
   const { resumeData, config } = state;
   const [showPreview, setShowPreview] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -63,6 +63,38 @@ export function ReviewForm() {
       alert('Error generating PDF. Please try again.');
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const createAnother = () => {
+    // Calculate how much data will be lost
+    const dataCount = {
+      education: resumeData.education.length,
+      experience: resumeData.experience.length,
+      projects: resumeData.projects.length,
+      skills: resumeData.skills.reduce((total, category) => total + category.items.length, 0),
+      achievements: resumeData.achievements.length
+    };
+    
+    const totalItems = Object.values(dataCount).reduce((sum, count) => sum + count, 0);
+    const hasPersonalInfo = resumeData.personalInfo.fullName || resumeData.personalInfo.email;
+    
+    const confirmClear = confirm(
+      '⚠️ CREATE NEW RESUME ⚠️\n\n' +
+      'This will permanently delete ALL your current data:\n' +
+      `• Personal information${hasPersonalInfo ? ' ✓' : ''}\n` +
+      `• ${dataCount.education} Education entries\n` +
+      `• ${dataCount.experience} Work experience entries\n` +
+      `• ${dataCount.projects} Projects\n` +
+      `• ${dataCount.skills} Skills\n` +
+      `• ${dataCount.achievements} Achievements\n\n` +
+      `Total: ${totalItems + (hasPersonalInfo ? 1 : 0)} items will be deleted\n\n` +
+      'Are you sure you want to start fresh with a new resume?'
+    );
+    
+    if (confirmClear) {
+      clearAllData();
+      alert('✅ All data cleared successfully!\n\nYou can now start creating a new resume from the beginning. Your previous resume data has been completely removed.');
     }
   };
 
@@ -238,6 +270,15 @@ export function ReviewForm() {
               <FileText size={24} />
               <h4>Save Progress</h4>
               <p>Save to local storage</p>
+            </button>
+            
+            <button
+              className="action-card create-another"
+              onClick={createAnother}
+            >
+              <Plus size={24} />
+              <h4>Create Another</h4>
+              <p>Start a new resume from scratch</p>
             </button>
           </div>
         </div>

@@ -20,6 +20,7 @@ type ResumeAction =
   | { type: 'UPDATE_CONFIG'; payload: Partial<ResumeConfig> }
   | { type: 'SET_CURRENT_STEP'; payload: number }
   | { type: 'COMPLETE_STEP'; payload: number }
+  | { type: 'CLEAR_ALL_DATA' }
   | { type: 'LOAD_SAVED_DATA'; payload: ResumeState };
 
 const initialResumeData: ResumeData = {
@@ -128,6 +129,16 @@ function resumeReducer(state: ResumeState, action: ResumeAction): ResumeState {
           isCompleted: index <= action.payload
         }))
       };
+    case 'CLEAR_ALL_DATA':
+      return {
+        ...initialState,
+        currentStep: 0,
+        steps: initialState.steps.map((step, index) => ({
+          ...step,
+          isActive: index === 0,
+          isCompleted: false
+        }))
+      };
     case 'LOAD_SAVED_DATA':
       return action.payload;
     default:
@@ -140,6 +151,7 @@ interface ResumeContextType {
   dispatch: React.Dispatch<ResumeAction>;
   saveProgress: () => void;
   loadProgress: () => void;
+  clearAllData: () => void;
 }
 
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
@@ -163,6 +175,11 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const clearAllData = () => {
+    dispatch({ type: 'CLEAR_ALL_DATA' });
+    localStorage.removeItem('cvforge-resume-data');
+  };
+
   // Auto-save progress
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -178,7 +195,7 @@ export function ResumeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <ResumeContext.Provider value={{ state, dispatch, saveProgress, loadProgress }}>
+    <ResumeContext.Provider value={{ state, dispatch, saveProgress, loadProgress, clearAllData }}>
       {children}
     </ResumeContext.Provider>
   );

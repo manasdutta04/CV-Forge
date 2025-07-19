@@ -238,6 +238,30 @@
   color: #6b7280;
 }
 
+/* Special styling for Create Another button */
+.action-card.create-another {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.action-card.create-another:hover:not(:disabled) {
+  border-color: #d97706;
+  background: rgba(217, 119, 6, 0.1);
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+}
+
+.action-card.create-another svg {
+  color: #d97706;
+}
+
+.action-card.create-another h4 {
+  color: #92400e;
+}
+
+.action-card.create-another p {
+  color: #a16207;
+}
+
 .tips-section {
   background: rgba(16, 185, 129, 0.05);
   border: 1px solid rgba(16, 185, 129, 0.2);

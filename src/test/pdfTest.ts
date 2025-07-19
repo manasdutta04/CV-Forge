@@ -91,7 +91,17 @@ const sampleResumeData: ResumeData = {
       description: "First place in university-level algorithmic programming contest"
     }
   ],
-  certifications: []
+  certifications: [
+    {
+      id: "cert-1",
+      name: "AWS Cloud Practitioner",
+      issuer: "Amazon Web Services",
+      issueDate: "2023-01-15",
+      expiryDate: "2026-01-15",
+      credentialId: "AWS-CP-12345",
+      url: "https://aws.amazon.com/certification/"
+    }
+  ]
 };
 
 export async function testPDFGeneration() {
