@@ -1,6 +1,6 @@
-# CV Forge 🔨
+# CV Forgee 🔨
 
-A modern, responsive resume builder web application specifically designed for Tier-2/Tier-3 students. CV Forge helps students create professional resumes through guided forms and structured questionnaires, making it easier to land internships, jobs, and opportunities.
+A modern, responsive resume builder web application specifically designed for Tier-2/Tier-3 students. CV Forgee helps students create professional resumes through guided forms and structured questionnaires, making it easier to land internships, jobs, and opportunities.
 
 ## ✨ Features
 
@@ -24,7 +24,7 @@ A modern, responsive resume builder web application specifically designed for Ti
 1. Clone the repository:
    ```bash
    git clone <your-repo-url>
-   cd cv-forge
+   cd cv-forgee
    ```
 
 2. Install dependencies:
@@ -70,7 +70,7 @@ A modern, responsive resume builder web application specifically designed for Ti
 
 ## 🎨 Design Philosophy
 
-CV Forge is designed with students in mind:
+CV Forgee is designed with students in mind:
 
 - **Beginner-Friendly**: Clear instructions and helpful hints
 - **Professional Output**: Industry-standard resume formats
@@ -133,7 +133,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 💡 For Students
 
-CV Forge is built by students, for students. We understand the challenges of creating a professional resume when you're just starting your career. This tool provides:
+CV Forgee is built by students, for students. We understand the challenges of creating a professional resume when you're just starting your career. This tool provides:
 
 - Templates optimized for student profiles
 - Guidance on what to include and how to phrase it
