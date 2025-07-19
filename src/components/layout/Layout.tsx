@@ -14,7 +14,9 @@ export function Layout({ children }: LayoutProps) {
       <header className="header">
         <div className="header__content">
         <div className="header__brand">
-          <h1 className="header__title">CV Forgee</h1>
+          <h1 className="header__title">
+            CV <span className="sparkle-text">Forgee</span>
+          </h1>
           <p className="header__subtitle">
             Engineered by{' '}
             <a 
