@@ -12,6 +12,7 @@ export function ExperienceForm() {
   const { experience } = state.resumeData;
 
   const [experienceList, setExperienceList] = useState<Experience[]>(experience);
+  const [skillsInputValues, setSkillsInputValues] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, Record<string, string>>>({});
 
   useEffect(() => {
@@ -101,8 +102,39 @@ export function ExperienceForm() {
   };
 
   const handleSkillsUpdate = (id: string, skillsText: string) => {
-    const skills = skillsText.split(',').map(skill => skill.trim()).filter(skill => skill);
-    updateExperience(id, 'skills', skills);
+    // Update the input value state to preserve what user is typing
+    setSkillsInputValues(prev => ({ ...prev, [id]: skillsText }));
+    
+    // Parse skills when user types comma
+    if (skillsText.includes(',')) {
+      const skills = skillsText
+        .split(',')
+        .map(skill => skill.trim())
+        .filter(skill => skill.length > 0);
+      
+      updateExperience(id, 'skills', skills);
+    }
+  };
+
+  const handleSkillsBlur = (id: string) => {
+    const value = skillsInputValues[id] || '';
+    if (value.trim()) {
+      const skills = value
+        .split(',')
+        .map(skill => skill.trim())
+        .filter(skill => skill.length > 0);
+      
+      updateExperience(id, 'skills', skills);
+      // Update input to reflect final state
+      setSkillsInputValues(prev => ({ ...prev, [id]: skills.join(', ') }));
+    }
+  };
+
+  const handleSkillsKeyDown = (id: string, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSkillsBlur(id);
+    }
   };
 
   const handleCurrentToggle = (id: string, isCurrent: boolean) => {
@@ -272,10 +304,38 @@ export function ExperienceForm() {
                 <Input
                   label="Skills Used (Optional)"
                   placeholder="e.g., React, Node.js, Python, Agile, etc."
-                  value={experience.skills?.join(', ') || ''}
+                  value={skillsInputValues[experience.id] ?? (experience.skills?.join(', ') || '')}
                   onChange={(value) => handleSkillsUpdate(experience.id, value)}
+                  onBlur={() => handleSkillsBlur(experience.id)}
+                  onKeyDown={(e) => handleSkillsKeyDown(experience.id, e)}
                   hint="Separate skills with commas"
                 />
+                
+                {experience.skills && experience.skills.length > 0 && (
+                  <div className="skills-preview">
+                    <div className="skills-count">
+                      {experience.skills.length} skill{experience.skills.length !== 1 ? 's' : ''} added
+                    </div>
+                    <div className="skills-tags">
+                      {experience.skills.map((skill, skillIndex) => (
+                        <span key={skillIndex} className="skill-tag">
+                          {skill}
+                          <button
+                            type="button"
+                            className="remove-skill"
+                            onClick={() => {
+                              const newSkills = experience.skills?.filter((_, i) => i !== skillIndex) || [];
+                              updateExperience(experience.id, 'skills', newSkills);
+                              setSkillsInputValues(prev => ({ ...prev, [experience.id]: newSkills.join(', ') }));
+                            }}
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

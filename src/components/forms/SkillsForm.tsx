@@ -19,6 +19,7 @@ export function SkillsForm() {
   const { skills } = state.resumeData;
 
   const [skillsList, setSkillsList] = useState<Skill[]>(skills);
+  const [inputValues, setInputValues] = useState<Record<number, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -42,6 +43,12 @@ export function SkillsForm() {
     };
     setSkillsList(newSkillsList);
 
+    // Update input value to reflect current skills
+    setInputValues(prev => ({ 
+      ...prev, 
+      [index]: newSkillsList[index].items.join(', ') 
+    }));
+
     // Clear error when user starts typing
     if (errors[`category-${index}`]) {
       setErrors(prev => ({ ...prev, [`category-${index}`]: '' }));
@@ -49,8 +56,43 @@ export function SkillsForm() {
   };
 
   const handleSkillsInput = (index: number, value: string) => {
-    const skills = value.split(',').map(skill => skill.trim());
-    updateSkillCategory(index, skills);
+    // Update the input value state to preserve what user is typing
+    setInputValues(prev => ({ ...prev, [index]: value }));
+    
+    // Parse skills when user types comma or enters
+    if (value.includes(',')) {
+      const skills = value
+        .split(',')
+        .map(skill => skill.trim())
+        .filter(skill => skill.length > 0);
+      
+      // Update skills without updating input value (to avoid feedback loop)
+      const newSkillsList = [...skillsList];
+      newSkillsList[index] = {
+        ...newSkillsList[index],
+        items: skills
+      };
+      setSkillsList(newSkillsList);
+    }
+  };
+
+  const handleSkillsBlur = (index: number) => {
+    const value = inputValues[index] || '';
+    if (value.trim()) {
+      const skills = value
+        .split(',')
+        .map(skill => skill.trim())
+        .filter(skill => skill.length > 0);
+      
+      updateSkillCategory(index, skills);
+    }
+  };
+
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSkillsBlur(index);
+    }
   };
 
   const addCustomCategory = () => {
@@ -191,16 +233,34 @@ export function SkillsForm() {
               <div className="skills-input-section">
                 <Input
                   placeholder={`Add ${skill.category.toLowerCase() || 'skills'}... (separate with commas)`}
-                  value={skill.items.join(', ')}
+                  value={inputValues[index] ?? skill.items.join(', ')}
                   onChange={(value) => handleSkillsInput(index, value)}
+                  onBlur={() => handleSkillsBlur(index)}
+                  onKeyDown={(e) => handleKeyDown(index, e)}
                   hint={`e.g., ${getSkillSuggestions(skill.category).slice(0, 3).join(', ')}`}
                 />
+                
+                {skill.items.length > 0 && (
+                  <div className="skills-count">
+                    {skill.items.length} skill{skill.items.length !== 1 ? 's' : ''} added
+                  </div>
+                )}
 
                 {skill.items.length > 0 && (
                   <div className="skills-preview">
                     {skill.items.map((item, itemIndex) => (
                       <span key={itemIndex} className="skill-tag">
                         {item}
+                        <button
+                          type="button"
+                          className="remove-skill"
+                          onClick={() => {
+                            const newItems = skill.items.filter((_, i) => i !== itemIndex);
+                            updateSkillCategory(index, newItems);
+                          }}
+                        >
+                          ×
+                        </button>
                       </span>
                     ))}
                   </div>

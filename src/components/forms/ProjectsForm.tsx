@@ -12,6 +12,7 @@ export function ProjectsForm() {
   const { projects } = state.resumeData;
 
   const [projectsList, setProjectsList] = useState<Project[]>(projects);
+  const [techInputValues, setTechInputValues] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, Record<string, string>>>({});
 
   useEffect(() => {
@@ -86,8 +87,39 @@ export function ProjectsForm() {
   };
 
   const handleTechnologiesUpdate = (id: string, techText: string) => {
-    const technologies = techText.split(',').map(tech => tech.trim()).filter(tech => tech);
-    updateProject(id, 'technologies', technologies);
+    // Update the input value state to preserve what user is typing
+    setTechInputValues(prev => ({ ...prev, [id]: techText }));
+    
+    // Parse technologies when user types comma
+    if (techText.includes(',')) {
+      const technologies = techText
+        .split(',')
+        .map(tech => tech.trim())
+        .filter(tech => tech.length > 0);
+      
+      updateProject(id, 'technologies', technologies);
+    }
+  };
+
+  const handleTechnologiesBlur = (id: string) => {
+    const value = techInputValues[id] || '';
+    if (value.trim()) {
+      const technologies = value
+        .split(',')
+        .map(tech => tech.trim())
+        .filter(tech => tech.length > 0);
+      
+      updateProject(id, 'technologies', technologies);
+      // Update input to reflect final state
+      setTechInputValues(prev => ({ ...prev, [id]: technologies.join(', ') }));
+    }
+  };
+
+  const handleTechKeyDown = (id: string, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleTechnologiesBlur(id);
+    }
   };
 
   const handleHighlightAdd = (id: string) => {
@@ -201,12 +233,40 @@ export function ProjectsForm() {
                 <Input
                   label="Technologies Used"
                   placeholder="e.g., React, Node.js, MongoDB, Express, CSS"
-                  value={project.technologies.join(', ')}
+                  value={techInputValues[project.id] ?? project.technologies.join(', ')}
                   onChange={(value) => handleTechnologiesUpdate(project.id, value)}
+                  onBlur={() => handleTechnologiesBlur(project.id)}
+                  onKeyDown={(e) => handleTechKeyDown(project.id, e)}
                   error={errors[project.id]?.technologies}
                   required
                   hint="Separate technologies with commas"
                 />
+                
+                {project.technologies.length > 0 && (
+                  <div className="tech-preview">
+                    <div className="tech-count">
+                      {project.technologies.length} technolog{project.technologies.length !== 1 ? 'ies' : 'y'} added
+                    </div>
+                    <div className="tech-tags">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span key={techIndex} className="tech-tag">
+                          {tech}
+                          <button
+                            type="button"
+                            className="remove-tech"
+                            onClick={() => {
+                              const newTechs = project.technologies.filter((_, i) => i !== techIndex);
+                              updateProject(project.id, 'technologies', newTechs);
+                              setTechInputValues(prev => ({ ...prev, [project.id]: newTechs.join(', ') }));
+                            }}
+                          >
+                            ×
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="form-row form-row--two-cols">

@@ -96,11 +96,11 @@ export class PDFGenerator {
     container.style.top = '0';
     container.style.width = '794px'; // A4 width in pixels at 96 DPI
     container.style.backgroundColor = 'white';
-    container.style.fontFamily = 'Arial, sans-serif';
-    container.style.fontSize = '14px';
-    container.style.lineHeight = '1.4';
-    container.style.color = '#333';
-    container.style.padding = '40px';
+    container.style.fontFamily = 'Times New Roman, Times, serif';
+    container.style.fontSize = '12pt';
+    container.style.lineHeight = '1.2';
+    container.style.color = '#000';
+    container.style.padding = '6px 15px 25px 15px';
     container.style.boxSizing = 'border-box';
 
     // Generate HTML content for the resume
@@ -121,190 +121,187 @@ export class PDFGenerator {
     const { personalInfo, education, experience, projects, skills, achievements } = resumeData;
 
     return `
-      <div style="max-width: 714px; margin: 0 auto; font-family: Arial, sans-serif;">
-        <!-- Header -->
-        <header style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #2563eb; padding-bottom: 20px;">
-          <h1 style="margin: 0 0 10px 0; font-size: 28px; color: #1e40af; font-weight: bold;">
+      <div style="font-family: 'Times New Roman', 'Times', serif; font-size: 12pt; line-height: 1.2; color: #000000; background: #ffffff; padding: 15px 15px 25px 15px;">
+        <!-- Header Section -->
+        <div style="text-align: center; margin-bottom: 12px; border-bottom: 1px solid #000000; padding-bottom: 6px;">
+          <h1 style="font-size: 20pt; font-weight: bold; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px;">
             ${personalInfo.fullName}
           </h1>
-          <div style="font-size: 14px; color: #666; line-height: 1.6;">
-            <div>${personalInfo.email} | ${personalInfo.phone}</div>
-            ${personalInfo.location ? `<div>${personalInfo.location}</div>` : ''}
-            <div style="margin-top: 8px;">
-              ${personalInfo.linkedIn ? `LinkedIn: ${personalInfo.linkedIn} | ` : ''}
-              ${personalInfo.github ? `GitHub: ${personalInfo.github}` : ''}
+          <div style="font-size: 11pt; margin: 3px 0;">
+            ${personalInfo.phone ? personalInfo.phone : ''}${personalInfo.phone && personalInfo.email ? ' | ' : ''}${personalInfo.email ? personalInfo.email : ''}${(personalInfo.phone || personalInfo.email) && personalInfo.location ? ' | ' : ''}${personalInfo.location ? personalInfo.location : ''}
+          </div>
+          ${personalInfo.linkedIn ? `
+            <div style="font-size: 11pt; margin: 3px 0;">
+              LinkedIn: ${personalInfo.linkedIn}${personalInfo.github ? ` | GitHub: ${personalInfo.github}` : ''}
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Objective -->
+        ${personalInfo.objective ? `
+          <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+              OBJECTIVE
+            </h2>
+            <div style="margin-left: 0;">
+              <p style="font-size: 12pt; margin: 0; text-align: justify; line-height: 1.3;">
+                ${personalInfo.objective}
+              </p>
             </div>
           </div>
-        </header>
-
-        <!-- Professional Objective -->
-        ${personalInfo.objective ? `
-          <section style="margin-bottom: 25px;">
-            <h2 style="color: #1e40af; font-size: 18px; margin: 0 0 10px 0; padding-bottom: 5px; border-bottom: 1px solid #e5e7eb;">
-              Professional Objective
-            </h2>
-            <p style="margin: 0; line-height: 1.6; color: #374151;">
-              ${personalInfo.objective}
-            </p>
-          </section>
         ` : ''}
 
         <!-- Education -->
         ${education.length > 0 ? `
-          <section style="margin-bottom: 25px;">
-            <h2 style="color: #1e40af; font-size: 18px; margin: 0 0 15px 0; padding-bottom: 5px; border-bottom: 1px solid #e5e7eb;">
-              Education
+          <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+              EDUCATION
             </h2>
-            ${education.map(edu => `
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px;">
-                  <div>
-                    <h3 style="margin: 0; font-size: 16px; color: #1f2937; font-weight: 600;">
-                      ${edu.degree} in ${edu.field}
-                    </h3>
-                    <div style="color: #6b7280; font-size: 14px;">${edu.institution}</div>
+            <div style="margin-left: 0;">
+              ${education.map(edu => `
+                <div style="margin-bottom: 8px;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                    <span style="font-weight: bold; font-size: 12pt;">
+                      ${edu.degree} in ${edu.field}, ${edu.institution}
+                    </span>
+                    <span style="font-size: 11pt; font-style: italic;">
+                      ${edu.startDate} - ${edu.endDate}
+                    </span>
                   </div>
-                  <div style="text-align: right; color: #6b7280; font-size: 14px;">
-                    <div>${edu.startDate} - ${edu.endDate}</div>
-                    ${edu.cgpa ? `<div>CGPA: ${edu.cgpa}</div>` : ''}
-                    ${edu.percentage ? `<div>${edu.percentage}%</div>` : ''}
-                  </div>
+                  ${(edu.cgpa || edu.percentage) ? `
+                    <div style="font-size: 11pt; margin-bottom: 3px;">
+                      ${edu.cgpa ? `CGPA: ${edu.cgpa}` : ''}${edu.cgpa && edu.percentage ? ', ' : ''}${edu.percentage ? `Percentage: ${edu.percentage}%` : ''}
+                    </div>
+                  ` : ''}
                 </div>
-                ${edu.achievements && edu.achievements.length > 0 ? `
-                  <ul style="margin: 8px 0 0 20px; padding: 0;">
-                    ${edu.achievements.map(achievement => `<li style="margin-bottom: 3px; color: #374151;">${achievement}</li>`).join('')}
-                  </ul>
-                ` : ''}
-              </div>
-            `).join('')}
-          </section>
-        ` : ''}
-
-        <!-- Experience -->
-        ${experience.length > 0 ? `
-          <section style="margin-bottom: 25px;">
-            <h2 style="color: #1e40af; font-size: 18px; margin: 0 0 15px 0; padding-bottom: 5px; border-bottom: 1px solid #e5e7eb;">
-              Experience
-            </h2>
-            ${experience.map(exp => `
-              <div style="margin-bottom: 20px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px;">
-                  <div>
-                    <h3 style="margin: 0; font-size: 16px; color: #1f2937; font-weight: 600;">
-                      ${exp.position}
-                    </h3>
-                    <div style="color: #6b7280; font-size: 14px;">${exp.company}</div>
-                  </div>
-                  <div style="text-align: right; color: #6b7280; font-size: 14px;">
-                    ${exp.startDate} - ${exp.current ? 'Present' : exp.endDate}
-                  </div>
-                </div>
-                ${exp.description.length > 0 ? `
-                  <ul style="margin: 8px 0 0 20px; padding: 0;">
-                    ${exp.description.map(desc => `<li style="margin-bottom: 3px; color: #374151;">${desc}</li>`).join('')}
-                  </ul>
-                ` : ''}
-                ${exp.skills && exp.skills.length > 0 ? `
-                  <div style="margin-top: 8px;">
-                    <strong style="color: #1f2937; font-size: 14px;">Skills:</strong>
-                    <span style="color: #374151; font-size: 14px;"> ${exp.skills.join(', ')}</span>
-                  </div>
-                ` : ''}
-              </div>
-            `).join('')}
-          </section>
-        ` : ''}
-
-        <!-- Projects -->
-        ${projects.length > 0 ? `
-          <section style="margin-bottom: 25px;">
-            <h2 style="color: #1e40af; font-size: 18px; margin: 0 0 15px 0; padding-bottom: 5px; border-bottom: 1px solid #e5e7eb;">
-              Projects
-            </h2>
-            ${projects.map(project => `
-              <div style="margin-bottom: 20px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px;">
-                  <h3 style="margin: 0; font-size: 16px; color: #1f2937; font-weight: 600;">
-                    ${project.name}
-                  </h3>
-                  <div style="color: #6b7280; font-size: 14px;">
-                    ${project.startDate} - ${project.endDate}
-                  </div>
-                </div>
-                <p style="margin: 5px 0; color: #374151; font-size: 14px; line-height: 1.5;">
-                  ${project.description}
-                </p>
-                ${project.highlights.length > 0 ? `
-                  <ul style="margin: 8px 0 0 20px; padding: 0;">
-                    ${project.highlights.map(highlight => `<li style="margin-bottom: 3px; color: #374151;">${highlight}</li>`).join('')}
-                  </ul>
-                ` : ''}
-                ${project.technologies.length > 0 ? `
-                  <div style="margin-top: 8px;">
-                    <strong style="color: #1f2937; font-size: 14px;">Technologies:</strong>
-                    <span style="color: #374151; font-size: 14px;"> ${project.technologies.join(', ')}</span>
-                  </div>
-                ` : ''}
-                ${project.githubUrl || project.liveUrl ? `
-                  <div style="margin-top: 8px; font-size: 14px;">
-                    ${project.githubUrl ? `<span style="color: #2563eb;">GitHub: ${project.githubUrl}</span>` : ''}
-                    ${project.githubUrl && project.liveUrl ? ' | ' : ''}
-                    ${project.liveUrl ? `<span style="color: #2563eb;">Live: ${project.liveUrl}</span>` : ''}
-                  </div>
-                ` : ''}
-              </div>
-            `).join('')}
-          </section>
+              `).join('')}
+            </div>
+          </div>
         ` : ''}
 
         <!-- Skills -->
         ${skills.length > 0 ? `
-          <section style="margin-bottom: 25px;">
-            <h2 style="color: #1e40af; font-size: 18px; margin: 0 0 15px 0; padding-bottom: 5px; border-bottom: 1px solid #e5e7eb;">
-              Skills
+          <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+              SKILLS
             </h2>
-            ${skills.filter(skill => skill.items.length > 0).map(skill => `
-              <div style="margin-bottom: 12px;">
-                <strong style="color: #1f2937; font-size: 14px;">${skill.category}:</strong>
-                <span style="color: #374151; font-size: 14px; margin-left: 8px;">
-                  ${skill.items.join(', ')}
-                </span>
-              </div>
-            `).join('')}
-          </section>
+            <div style="margin-left: 0;">
+              ${skills.map(skillCategory => `
+                <div style="margin-bottom: 4px; display: flex; gap: 8px;">
+                  <span style="font-weight: bold; min-width: 130px; flex-shrink: 0; font-size: 12pt;">
+                    ${skillCategory.category}:
+                  </span>
+                  <span style="flex: 1; font-size: 12pt;">
+                    ${skillCategory.items.join(', ')}
+                  </span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Experience -->
+        ${experience.length > 0 ? `
+          <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+              WORK EXPERIENCE
+            </h2>
+            <div style="margin-left: 0;">
+              ${experience.map(exp => `
+                <div style="margin-bottom: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                    <span style="font-weight: bold; font-size: 12pt;">
+                      ${exp.position}
+                    </span>
+                    <span style="font-size: 11pt; font-style: italic;">
+                      ${exp.startDate} – ${exp.current ? 'Present' : exp.endDate}
+                    </span>
+                  </div>
+                  <div style="font-size: 12pt; margin-bottom: 3px;">
+                    ${exp.company}
+                  </div>
+                  ${exp.description.length > 0 ? `
+                    <ul style="margin: 3px 0 0 18px; padding: 0;">
+                      ${exp.description.map(desc => `
+                        <li style="margin-bottom: 2px; font-size: 12pt; line-height: 1.3;">
+                          ${desc}
+                        </li>
+                      `).join('')}
+                    </ul>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Projects -->
+        ${projects.length > 0 ? `
+          <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+              PROJECTS
+            </h2>
+            <div style="margin-left: 0;">
+              ${projects.map(project => `
+                <div style="margin-bottom: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                    <span style="font-weight: bold; font-size: 12pt;">
+                      ${project.name}
+                    </span>
+                    <span style="font-size: 11pt; font-style: italic;">
+                      ${project.startDate} ${project.endDate ? `– ${project.endDate}` : ''}
+                    </span>
+                  </div>
+                  <div style="font-size: 12pt; margin-bottom: 3px;">
+                    ${project.description}
+                  </div>
+                  <div style="font-size: 11pt; margin-bottom: 3px;">
+                    <strong>Technologies:</strong> ${project.technologies.join(', ')}
+                  </div>
+                  ${project.highlights.length > 0 ? `
+                    <ul style="margin: 3px 0 0 18px; padding: 0;">
+                      ${project.highlights.map(highlight => `
+                        <li style="margin-bottom: 2px; font-size: 12pt; line-height: 1.3;">
+                          ${highlight}
+                        </li>
+                      `).join('')}
+                    </ul>
+                  ` : ''}
+                </div>
+              `).join('')}
+            </div>
+          </div>
         ` : ''}
 
         <!-- Achievements -->
         ${achievements.length > 0 ? `
-          <section style="margin-bottom: 25px;">
-            <h2 style="color: #1e40af; font-size: 18px; margin: 0 0 15px 0; padding-bottom: 5px; border-bottom: 1px solid #e5e7eb;">
-              Achievements & Awards
+          <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+              ACHIEVEMENTS & ACTIVITIES
             </h2>
-            ${achievements.map(achievement => `
-              <div style="margin-bottom: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                  <div>
-                    <h3 style="margin: 0; font-size: 14px; color: #1f2937; font-weight: 600;">
+            <div style="margin-left: 0;">
+              ${achievements.map(achievement => `
+                <div style="margin-bottom: 8px;">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                    <span style="font-weight: bold; font-size: 12pt;">
                       ${achievement.title}
-                    </h3>
-                    ${achievement.organization ? `
-                      <div style="color: #6b7280; font-size: 13px;">${achievement.organization}</div>
-                    ` : ''}
-                    ${achievement.description ? `
-                      <p style="margin: 4px 0 0 0; color: #374151; font-size: 13px;">
-                        ${achievement.description}
-                      </p>
-                    ` : ''}
-                  </div>
-                  ${achievement.date ? `
-                    <div style="color: #6b7280; font-size: 13px; text-align: right;">
+                    </span>
+                    <span style="font-size: 11pt; font-style: italic;">
                       ${achievement.date}
+                    </span>
+                  </div>
+                  ${achievement.organization ? `
+                    <div style="font-size: 12pt; margin-bottom: 3px;">
+                      ${achievement.organization}
                     </div>
                   ` : ''}
+                  <div style="font-size: 12pt; margin-bottom: 3px;">
+                    ${achievement.description}
+                  </div>
                 </div>
-              </div>
-            `).join('')}
-          </section>
+              `).join('')}
+            </div>
+          </div>
         ` : ''}
       </div>
     `;

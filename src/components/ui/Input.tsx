@@ -8,6 +8,7 @@ interface InputProps {
   value: string;
   onChange: (value: string) => void;
   onBlur?: () => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   error?: string;
   required?: boolean;
   disabled?: boolean;
@@ -23,6 +24,7 @@ export function Input({
   value,
   onChange,
   onBlur,
+  onKeyDown,
   error,
   required = false,
   disabled = false,
@@ -51,6 +53,7 @@ export function Input({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onBlur={onBlur}
+          onKeyDown={onKeyDown}
           disabled={disabled}
           required={required}
         />

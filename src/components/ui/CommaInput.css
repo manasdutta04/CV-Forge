@@ -1,0 +1,75 @@
+.comma-input {
+  width: 100%;
+}
+
+.comma-input-preview {
+  margin-top: 1rem;
+}
+
+.comma-input-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.comma-input-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.comma-input-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.comma-input-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.comma-input-tag--blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.comma-input-tag--purple {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.comma-input-tag--green {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+}
+
+.comma-input-tag--orange {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.comma-input-remove {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.comma-input-remove:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
