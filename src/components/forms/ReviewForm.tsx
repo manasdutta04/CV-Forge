@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Download, Eye, Edit3, CheckCircle, FileText, Printer, Plus, FileDown } from 'lucide-react';
+import { Download, Eye, Edit3, CheckCircle, Printer, Plus, FileDown, FileType, Save } from 'lucide-react';
 import { useResume } from '../../context/ResumeContext';
 import { Button } from '../ui/Button';
 import { ResumePreview } from '../resume/ResumePreview';
 import { PDFGenerator } from '../../utils/pdfGenerator';
+import { DOCXGenerator } from '../../utils/docxGenerator';
 import ATSScore from '../ats/ATSScore';
 import './ReviewForm.css';
 
@@ -62,6 +63,37 @@ export function ReviewForm() {
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Error generating PDF. Please try again.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const generateDOCX = async () => {
+    setIsGenerating(true);
+    try {
+      // Check if user has minimal data for a meaningful resume
+      const hasMinimalData = resumeData.personalInfo.fullName && 
+                            resumeData.personalInfo.email && 
+                            (resumeData.education.length > 0 || resumeData.experience.length > 0);
+
+      if (!hasMinimalData) {
+        alert('Please fill out at least your personal information and either education or experience before generating a DOCX file.');
+        return;
+      }
+
+      // Generate DOCX using the DOCX generator utility
+      const success = await DOCXGenerator.generateResumeDocx(resumeData, 
+        `${resumeData.personalInfo.fullName.replace(/\s+/g, '_')}_Resume.docx`
+      );
+
+      if (success) {
+        alert('Resume DOCX generated and downloaded successfully!');
+      } else {
+        throw new Error('Failed to generate DOCX');
+      }
+    } catch (error) {
+      console.error('Error generating DOCX:', error);
+      alert('Error generating DOCX. Please try again.');
     } finally {
       setIsGenerating(false);
     }
@@ -248,7 +280,7 @@ export function ReviewForm() {
             
             @media print {
               body {
-                padding: 0.5in;
+                padding: 0.25in 0.5in 0.5in 0.5in;
               }
             }
           </style>
@@ -566,6 +598,16 @@ export function ReviewForm() {
               <h4>{isGenerating ? 'Generating...' : 'Download PDF'}</h4>
               <p>{isGenerating ? 'Please wait' : 'Get your resume as PDF'}</p>
             </button>
+
+            <button
+              className="action-card"
+              onClick={generateDOCX}
+              disabled={isGenerating}
+            >
+              <FileType size={24} />
+              <h4>{isGenerating ? 'Generating...' : 'Download DOCX'}</h4>
+              <p>{isGenerating ? 'Please wait' : 'Get editable Word document'}</p>
+            </button>
             
             <button
               className="action-card"
@@ -580,7 +622,7 @@ export function ReviewForm() {
               className="action-card"
               onClick={saveProgress}
             >
-              <FileText size={24} />
+              <Save size={24} />
               <h4>Save Progress</h4>
               <p>Save to local storage</p>
             </button>

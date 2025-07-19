@@ -138,9 +138,20 @@ export function ExperienceForm() {
   };
 
   const handleCurrentToggle = (id: string, isCurrent: boolean) => {
-    updateExperience(id, 'current', isCurrent);
-    if (isCurrent) {
-      updateExperience(id, 'endDate', '');
+    setExperienceList(prevList => 
+      prevList.map(exp => 
+        exp.id === id 
+          ? { ...exp, current: isCurrent, endDate: isCurrent ? '' : exp.endDate }
+          : exp
+      )
+    );
+    
+    // Clear endDate error if setting to current
+    if (isCurrent && errors[id]?.endDate) {
+      setErrors(prev => ({
+        ...prev,
+        [id]: { ...prev[id], endDate: '' }
+      }));
     }
   };
 
@@ -239,7 +250,7 @@ export function ExperienceForm() {
                   <label className="checkbox-label">
                     <input
                       type="checkbox"
-                      checked={experience.current}
+                      checked={experience.current || false}
                       onChange={(e) => handleCurrentToggle(experience.id, e.target.checked)}
                     />
                     I currently work here
