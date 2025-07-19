@@ -44,7 +44,7 @@
 .resume-content {
   flex: 1;
   overflow-y: auto;
-  padding: 40px;
+  padding: 10px 12px;
   font-family: 'Times New Roman', 'Times', serif;
   font-size: 11pt;
   line-height: 1.2;
@@ -57,23 +57,23 @@
 /* Header Section */
 .resume-header {
   text-align: center;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #000000;
-  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1.5px solid #000000;
+  padding-bottom: 6px;
 }
 
 .resume-name {
   font-size: 18pt;
   font-weight: bold;
-  margin: 0 0 8px 0;
+  margin: 0 0 5px 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
 }
 
 .contact-line,
 .social-line {
   font-size: 10pt;
-  margin: 4px 0;
+  margin: 2px 0;
 }
 
 .contact-line span,
@@ -83,17 +83,17 @@
 
 /* Section Styles */
 .resume-section {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .section-heading {
   font-size: 12pt;
   font-weight: bold;
   text-transform: uppercase;
-  margin: 0 0 8px 0;
+  margin: 0 0 5px 0;
   padding-bottom: 2px;
   border-bottom: 1px solid #000000;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .section-content {
@@ -105,7 +105,11 @@
 .experience-item,
 .project-item,
 .achievement-item {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+}
+
+.achievement-item {
+  margin-bottom: 8px;
 }
 
 .item-header {
@@ -127,29 +131,38 @@
 
 .item-subtitle {
   font-size: 11pt;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+}
+
+.achievement-item .item-subtitle {
+  margin-bottom: 2px;
 }
 
 .item-description {
   font-size: 11pt;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.achievement-item .item-description {
+  margin-bottom: 2px;
 }
 
 .item-details {
   font-size: 10pt;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 /* Skills Section */
 .skill-item {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   display: flex;
   gap: 8px;
 }
 
 .skill-category-name {
   font-weight: bold;
-  min-width: 140px;
+  min-width: 120px;
   flex-shrink: 0;
 }
 
@@ -159,12 +172,12 @@
 
 /* Lists */
 .item-bullets {
-  margin: 4px 0 0 20px;
+  margin: 3px 0 0 16px;
   padding: 0;
 }
 
 .item-bullets li {
-  margin-bottom: 3px;
+  margin-bottom: 2px;
   font-size: 11pt;
   line-height: 1.3;
 }
@@ -197,16 +210,36 @@
   }
   
   .resume-content {
-    padding: 0.5in;
+    padding: 10px 12px;
     font-size: 11pt;
+    line-height: 1.2;
   }
   
   .resume-section {
     page-break-inside: avoid;
+    margin-bottom: 14px;
   }
   
   .item-header {
     page-break-inside: avoid;
+  }
+  
+  .resume-name {
+    font-size: 18pt;
+    margin: 0 0 5px 0;
+    letter-spacing: 0.8px;
+  }
+  
+  .resume-header {
+    margin-bottom: 12px;
+    border-bottom: 1.5px solid #000000;
+    padding-bottom: 6px;
+  }
+  
+  .section-heading {
+    font-size: 12pt;
+    margin: 0 0 5px 0;
+    letter-spacing: 0.3px;
   }
 }
 

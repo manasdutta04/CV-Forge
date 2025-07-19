@@ -149,3 +149,8 @@ CV Forge is built by students, for students. We understand the challenges of cre
 ---
 
 **Made with ❤️ for students everywhere** 🎓
+
+
+## Developers
+
+[![Manas Dutta](https://avatars.githubusercontent.com/u/122201926?size=50)](https://github.com/manasdutta04 "Manas on GitHub") 

@@ -97,10 +97,10 @@ export class PDFGenerator {
     container.style.width = '794px'; // A4 width in pixels at 96 DPI
     container.style.backgroundColor = 'white';
     container.style.fontFamily = 'Times New Roman, Times, serif';
-    container.style.fontSize = '12pt';
+    container.style.fontSize = '11pt';
     container.style.lineHeight = '1.2';
     container.style.color = '#000';
-    container.style.padding = '6px 15px 25px 15px';
+    container.style.padding = '10px 12px 10px 12px';
     container.style.boxSizing = 'border-box';
 
     // Generate HTML content for the resume
@@ -121,17 +121,17 @@ export class PDFGenerator {
     const { personalInfo, education, experience, projects, skills, achievements } = resumeData;
 
     return `
-      <div style="font-family: 'Times New Roman', 'Times', serif; font-size: 12pt; line-height: 1.2; color: #000000; background: #ffffff; padding: 15px 15px 25px 15px;">
+      <div style="font-family: 'Times New Roman', 'Times', serif; font-size: 11pt; line-height: 1.2; color: #000000; background: #ffffff; padding: 8px; min-height: 100vh; display: flex; flex-direction: column;">
         <!-- Header Section -->
-        <div style="text-align: center; margin-bottom: 12px; border-bottom: 1px solid #000000; padding-bottom: 6px;">
-          <h1 style="font-size: 20pt; font-weight: bold; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px;">
+        <div style="text-align: center; margin-bottom: 12px; border-bottom: 1.5px solid #000000; padding-bottom: 6px;">
+          <h1 style="font-size: 18pt; font-weight: bold; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 0.8px;">
             ${personalInfo.fullName}
           </h1>
-          <div style="font-size: 11pt; margin: 3px 0;">
+          <div style="font-size: 10pt; margin: 2px 0;">
             ${personalInfo.phone ? personalInfo.phone : ''}${personalInfo.phone && personalInfo.email ? ' | ' : ''}${personalInfo.email ? personalInfo.email : ''}${(personalInfo.phone || personalInfo.email) && personalInfo.location ? ' | ' : ''}${personalInfo.location ? personalInfo.location : ''}
           </div>
           ${personalInfo.linkedIn ? `
-            <div style="font-size: 11pt; margin: 3px 0;">
+            <div style="font-size: 10pt; margin: 2px 0;">
               LinkedIn: ${personalInfo.linkedIn}${personalInfo.github ? ` | GitHub: ${personalInfo.github}` : ''}
             </div>
           ` : ''}
@@ -139,12 +139,12 @@ export class PDFGenerator {
 
         <!-- Objective -->
         ${personalInfo.objective ? `
-          <div style="margin-bottom: 12px;">
-            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.3px;">
               OBJECTIVE
             </h2>
             <div style="margin-left: 0;">
-              <p style="font-size: 12pt; margin: 0; text-align: justify; line-height: 1.3;">
+              <p style="font-size: 11pt; margin: 0; text-align: justify; line-height: 1.3;">
                 ${personalInfo.objective}
               </p>
             </div>
@@ -153,23 +153,23 @@ export class PDFGenerator {
 
         <!-- Education -->
         ${education.length > 0 ? `
-          <div style="margin-bottom: 12px;">
-            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.3px;">
               EDUCATION
             </h2>
             <div style="margin-left: 0;">
               ${education.map(edu => `
                 <div style="margin-bottom: 8px;">
                   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
-                    <span style="font-weight: bold; font-size: 12pt;">
+                    <span style="font-weight: bold; font-size: 11pt;">
                       ${edu.degree} in ${edu.field}, ${edu.institution}
                     </span>
-                    <span style="font-size: 11pt; font-style: italic;">
+                    <span style="font-size: 10pt; font-style: italic;">
                       ${edu.startDate} - ${edu.endDate}
                     </span>
                   </div>
                   ${(edu.cgpa || edu.percentage) ? `
-                    <div style="font-size: 11pt; margin-bottom: 3px;">
+                    <div style="font-size: 10pt; margin-bottom: 2px;">
                       ${edu.cgpa ? `CGPA: ${edu.cgpa}` : ''}${edu.cgpa && edu.percentage ? ', ' : ''}${edu.percentage ? `Percentage: ${edu.percentage}%` : ''}
                     </div>
                   ` : ''}
@@ -181,17 +181,17 @@ export class PDFGenerator {
 
         <!-- Skills -->
         ${skills.length > 0 ? `
-          <div style="margin-bottom: 12px;">
-            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.3px;">
               SKILLS
             </h2>
             <div style="margin-left: 0;">
               ${skills.map(skillCategory => `
                 <div style="margin-bottom: 4px; display: flex; gap: 8px;">
-                  <span style="font-weight: bold; min-width: 130px; flex-shrink: 0; font-size: 12pt;">
+                  <span style="font-weight: bold; min-width: 120px; flex-shrink: 0; font-size: 11pt;">
                     ${skillCategory.category}:
                   </span>
-                  <span style="flex: 1; font-size: 12pt;">
+                  <span style="flex: 1; font-size: 11pt;">
                     ${skillCategory.items.join(', ')}
                   </span>
                 </div>
@@ -202,28 +202,28 @@ export class PDFGenerator {
 
         <!-- Experience -->
         ${experience.length > 0 ? `
-          <div style="margin-bottom: 12px;">
-            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.3px;">
               WORK EXPERIENCE
             </h2>
             <div style="margin-left: 0;">
               ${experience.map(exp => `
                 <div style="margin-bottom: 10px;">
                   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
-                    <span style="font-weight: bold; font-size: 12pt;">
+                    <span style="font-weight: bold; font-size: 11pt;">
                       ${exp.position}
                     </span>
-                    <span style="font-size: 11pt; font-style: italic;">
+                    <span style="font-size: 10pt; font-style: italic;">
                       ${exp.startDate} – ${exp.current ? 'Present' : exp.endDate}
                     </span>
                   </div>
-                  <div style="font-size: 12pt; margin-bottom: 3px;">
+                  <div style="font-size: 11pt; margin-bottom: 3px;">
                     ${exp.company}
                   </div>
                   ${exp.description.length > 0 ? `
-                    <ul style="margin: 3px 0 0 18px; padding: 0;">
+                    <ul style="margin: 3px 0 0 16px; padding: 0;">
                       ${exp.description.map(desc => `
-                        <li style="margin-bottom: 2px; font-size: 12pt; line-height: 1.3;">
+                        <li style="margin-bottom: 2px; font-size: 11pt; line-height: 1.3;">
                           ${desc}
                         </li>
                       `).join('')}
@@ -237,31 +237,31 @@ export class PDFGenerator {
 
         <!-- Projects -->
         ${projects.length > 0 ? `
-          <div style="margin-bottom: 12px;">
-            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.3px;">
               PROJECTS
             </h2>
             <div style="margin-left: 0;">
               ${projects.map(project => `
                 <div style="margin-bottom: 10px;">
                   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
-                    <span style="font-weight: bold; font-size: 12pt;">
+                    <span style="font-weight: bold; font-size: 11pt;">
                       ${project.name}
                     </span>
-                    <span style="font-size: 11pt; font-style: italic;">
+                    <span style="font-size: 10pt; font-style: italic;">
                       ${project.startDate} ${project.endDate ? `– ${project.endDate}` : ''}
                     </span>
                   </div>
-                  <div style="font-size: 12pt; margin-bottom: 3px;">
+                  <div style="font-size: 11pt; margin-bottom: 3px;">
                     ${project.description}
                   </div>
-                  <div style="font-size: 11pt; margin-bottom: 3px;">
+                  <div style="font-size: 10pt; margin-bottom: 3px;">
                     <strong>Technologies:</strong> ${project.technologies.join(', ')}
                   </div>
                   ${project.highlights.length > 0 ? `
-                    <ul style="margin: 3px 0 0 18px; padding: 0;">
+                    <ul style="margin: 3px 0 0 16px; padding: 0;">
                       ${project.highlights.map(highlight => `
-                        <li style="margin-bottom: 2px; font-size: 12pt; line-height: 1.3;">
+                        <li style="margin-bottom: 2px; font-size: 11pt; line-height: 1.3;">
                           ${highlight}
                         </li>
                       `).join('')}
@@ -275,27 +275,27 @@ export class PDFGenerator {
 
         <!-- Achievements -->
         ${achievements.length > 0 ? `
-          <div style="margin-bottom: 12px;">
-            <h2 style="font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.5px;">
+          <div style="margin-bottom: 14px;">
+            <h2 style="font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0 0 5px 0; padding-bottom: 2px; border-bottom: 1px solid #000000; letter-spacing: 0.3px;">
               ACHIEVEMENTS & ACTIVITIES
             </h2>
             <div style="margin-left: 0;">
               ${achievements.map(achievement => `
                 <div style="margin-bottom: 8px;">
                   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
-                    <span style="font-weight: bold; font-size: 12pt;">
+                    <span style="font-weight: bold; font-size: 11pt;">
                       ${achievement.title}
                     </span>
-                    <span style="font-size: 11pt; font-style: italic;">
+                    <span style="font-size: 10pt; font-style: italic;">
                       ${achievement.date}
                     </span>
                   </div>
                   ${achievement.organization ? `
-                    <div style="font-size: 12pt; margin-bottom: 3px;">
+                    <div style="font-size: 11pt; margin-bottom: 2px;">
                       ${achievement.organization}
                     </div>
                   ` : ''}
-                  <div style="font-size: 12pt; margin-bottom: 3px;">
+                  <div style="font-size: 11pt; margin-bottom: 2px; line-height: 1.3;">
                     ${achievement.description}
                   </div>
                 </div>
