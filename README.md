@@ -140,12 +140,6 @@ CV Forgee is built by students, for students. We understand the challenges of cr
 - Industry-standard formatting
 - ATS-friendly designs
 
-## 🙏 Acknowledgments
-
-- Built with ❤️ for the student community
-- Inspired by the need for accessible resume-building tools
-- Thanks to all contributors and beta testers
-
 ---
 
 **Made with ❤️ for students everywhere** 🎓
